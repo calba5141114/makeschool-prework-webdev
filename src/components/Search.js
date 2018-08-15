@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import './Search.css';
+import config from './config';
+// importing the API key from the config file.
+
 export default class Search extends Component {
 
     constructor() {
@@ -15,7 +19,7 @@ export default class Search extends Component {
 
     // returns and processes JSON data from Giphy API
     searchKeyword(keyWord) {
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${keyWord}&api_key=D8qiB09X8jDja3OkYobyd1sI8qcFD8Tx`)
+        fetch(`http://api.giphy.com/v1/gifs/search?q=${keyWord}&api_key=${config.api_key}`)
             .then(data => {
                 // console.log(data)
                 // formats the json file so that it can be parsed out
@@ -50,13 +54,14 @@ export default class Search extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form className="form" onSubmit={this.handleSubmit}>
                     <input type="text" value={this.state.value} onChange={this.handleChange} placeholder="GIF" />
-                    <br/>
-                    <input type="submit" value="Submit" />
+                    <input className=" main_button" type="submit" value="Submit" />
                 </form>
-                <br/>
-                {this.state.giphyImageData}
+                <br />
+                <div className="holder">
+                    {this.state.giphyImageData}
+                </div>
             </div>
         );
     }
